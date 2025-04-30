@@ -1,0 +1,236 @@
+/* Note 페이지 스타일 */
+.note-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 0;
+    margin-top: 4rem;
+}
+
+.page-title {
+    font-size: 3.625rem;
+    font-weight: 400;
+    margin-bottom: 6rem;
+    letter-spacing: 0em;
+}
+
+/* 블로그 그리드 레이아웃 */
+.note-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* 블로그 카드 스타일 */
+.note-card {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.note-card:hover .card-image img {
+    transform: scale(1.03);
+}
+
+.card-content {
+    padding: 0 10px;
+}
+
+.card-date {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.card-excerpt {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.page-btn:hover {
+    color: #1e1e1e;
+}
+
+.current-page {
+    font-size: 16px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .note-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+    
+    .card-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .note-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .card-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .note-container {
+        padding: 100px 20px 60px;
+    }
+
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 40px;
+    }
+    
+    .note-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .card-image {
+        height: 230px;
+    }
+}
+
+@media (max-width: 480px) {
+    .note-container {
+        padding: 80px 15px 50px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+    
+    .card-image {
+        height: 200px;
+    }
+    
+    .card-title {
+        font-size: 18px;
+    }
+    
+    .card-excerpt {
+        font-size: 14px;
+    }
+}
+
+/* 글쓰기 폼 스타일 추가 */
+.note-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #eee;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-color: #1e1e1e;
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 3rem;
+}
+
+.cancel-btn {
+    padding: 0.8rem 2rem;
+    background: none;
+    border: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    border-color: #1e1e1e;
+}
+
+.submit-btn {
+    padding: 0.8rem 2rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.submit-btn:hover {
+    opacity: 0.8;
+} 

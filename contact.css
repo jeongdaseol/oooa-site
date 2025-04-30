@@ -1,0 +1,195 @@
+/* Contact 페이지 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    color: #1e1e1e;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.contact-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 8rem 0;
+    margin-top: 4rem;
+}
+
+/* 상단 그리드: 회사 정보와 지도 */
+.top-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 6rem;
+}
+
+/* 하단 그리드: CONTACT US */
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* 오피스 정보 영역 (왼쪽 상단) */
+.office-info h2 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    /* margin-bottom: 6rem; */
+    letter-spacing: 0em;
+}
+
+.office-details {
+    margin: 20px 0;
+    font-size: 1rem;
+}
+
+.company-name {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.address {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.phone {
+    font-size: 1rem;
+}
+
+/* 지도 영역 (오른쪽 상단) */
+.map-section {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    filter: grayscale(100%);
+    border: 0;
+}
+
+/* CONTACT US 영역 (왼쪽 하단) */
+.contact-info h2 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    /* margin-bottom: 6rem; */
+    letter-spacing: 0em;
+}
+
+.contact-desc {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 폼 영역 (오른쪽 하단) */
+.form-section {
+    width: 100%;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #eee;
+    font-size: 14px;
+    width: 100%;
+    background: transparent;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submit-btn {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: none;
+    padding: 15px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #333;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 100px 20px 60px;
+    }
+    
+    .top-grid,
+    .bottom-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .top-grid {
+        margin-bottom: 60px;
+    }
+    
+    .map-section {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 80px 15px 50px;
+    }
+    
+    .office-info h2,
+    .contact-info h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    
+    .top-grid {
+        margin-bottom: 40px;
+    }
+    
+    .map-container {
+        height: 200px;
+    }
+} 

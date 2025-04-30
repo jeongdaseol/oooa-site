@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siondang | OOOA Architects</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <!-- Lenis 스크롤 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            z-index: 1;
+            perspective: 1px;
+            transform-style: preserve-3d;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%; /* 약간 더 크게 설정하여 스크롤 시 여백 제공 */
+            background-image: url('images/siondang/main.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transform: translateZ(-1px) scale(2); /* 패럴랙스 효과를 위한 transform */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 40%;
+            left: 5vw;
+            color: white;
+            z-index: 3;
+        }
+
+        .project-name {
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            color: white;
+            z-index: 3;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 100%);
+            padding-top: 8rem;
+        }
+
+        .info-title {
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            padding: 0 5vw;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            padding: 2rem 5vw 4rem;
+        }
+
+        .info-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5vw;
+            right: 5vw;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .info-label {
+            font-size: 1rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .info-value {
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        /* Project Info 애니메이션 */
+        .info-item:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.1s forwards; }
+        .info-item:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.2s forwards; }
+        .info-item:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.3s forwards; }
+        .info-item:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.4s forwards; }
+        .info-item:nth-child(5) { animation: fadeInUp 0.8s ease-out 0.5s forwards; }
+        .info-item:nth-child(6) { animation: fadeInUp 0.8s ease-out 0.6s forwards; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                left: 5vw;
+                bottom: 40%;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .info-title {
+                padding: 0 5vw;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2rem 5vw;
+            }
+        }
+
+        /* 프로젝트 설명 섹션 스타일 */
+        .project-description {
+            padding: 12rem 0;
+            background: #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .description-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 10vw;
+        }
+
+        .project-title {
+            font-size: 5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            grid-column: 1;
+            margin: 0;
+        }
+
+        .description-text {
+            grid-column: 2 / span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-content: start;
+        }
+
+        .text-block {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        @media (max-width: 1200px) {
+            .description-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .project-title {
+                font-size: 4rem;
+            }
+
+            .description-text {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-description {
+                padding: 8rem 0;
+            }
+
+            .description-grid {
+                padding: 0 5vw;
+            }
+
+            .project-title {
+                font-size: 3rem;
+            }
+
+            .description-text {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* 프로젝트 이미지 갤러리 스타일 */
+        .project-gallery {
+            padding: 1px 5vw 8rem;
+            background: #fff;
+            position: relative;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        /* 첫 번째 행: 2개 이미지 */
+        .gallery-item:nth-child(1),
+        .gallery-item:nth-child(2) {
+            grid-column: span 6;
+        }
+
+        /* 두 번째 행: 1개 큰 이미지 */
+        .gallery-item:nth-child(3) {
+            grid-column: 2 / span 10;
+            margin: 0;
+        }
+
+        /* 세 번째 행: 2개 이미지 */
+        .gallery-item:nth-child(4),
+        .gallery-item:nth-child(5) {
+            grid-column: span 6;
+        }
+
+        /* 네 번째 행: 2개 이미지 */
+        .gallery-item:nth-child(6),
+        .gallery-item:nth-child(7) {
+            grid-column: span 6;
+        }
+
+        /* 다섯 번째 행: 1개 큰 이미지 */
+        .gallery-item:nth-child(8) {
+            grid-column: 2 / span 10;
+            margin: 0;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            color: white;
+            font-size: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1200px) {
+            .gallery-item {
+                grid-column: span 12 !important;
+                margin: 0 !important;
+            }
+
+            .gallery-grid {
+                gap: 2rem;
+            }
+
+            .gallery-item:not(:last-child) {
+                margin-bottom: 2rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-gallery {
+                padding: 4rem 5vw;
+            }
+
+            .gallery-grid {
+                gap: 1.5rem;
+            }
+
+            .gallery-item:not(:last-child) {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+
+        /* 이미지 패럴랙스 효과를 위한 스타일 */
+        .parallax-wrapper {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .parallax-image {
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 140%;
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        /* 이미지 팝업 스타일 */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+        }
+
+        .popup-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            opacity: 0;
+            transform: scale(0.85);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 10000;
+            margin: 0 100px;
+        }
+
+        .popup-overlay.active .popup-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .popup-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            z-index: 10001;
+            background: #000;
+        }
+
+        /* 팝업 닫기 버튼 스타일 */
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            box-shadow: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .popup-overlay.active .popup-close {
+            opacity: 1;
+        }
+        .popup-close:hover {
+            opacity: 1;
+            transform: none;
+        }
+
+        .popup-caption {
+            position: absolute;
+            bottom: -2rem;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #eee;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .popup-overlay.active .popup-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .popup-caption {
+                bottom: -2.5rem;
+                font-size: 0.875rem;
+            }
+            .popup-content {
+                margin: 0 60px;
+            }
+        }
+
+        /* 갤러리 아이템 커서 스타일 */
+        .gallery-image-wrapper {
+            cursor: pointer;
+        }
+
+        /* 팝업 네비게이션 버튼 스타일 */
+        .slider-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10002;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+        }
+        .popup-overlay.active .slider-nav { opacity: 0.7; }
+        .slider-nav:hover { 
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .slider-nav.prev { left: 1vw; }
+        .slider-nav.next { right: 1vw; }
+        .slider-nav i {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        @media (max-width: 768px) {
+            .slider-nav {
+                width: 60px;
+                height: 60px;
+            }
+            .slider-nav.prev { left: 1rem; }
+            .slider-nav.next { right: 1rem; }
+            .slider-nav i {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="nav-container"></div>
+
+    <section class="hero-section">
+        <div class="hero-background"></div>
+        <div class="overlay"></div>
+        
+        <div class="hero-content">
+            <div class="project-name">2025 / Stay, Library</div>
+            <h1 class="hero-title">SIONDANG</h1>
+        </div>
+
+        <div class="project-info">
+            <div class="info-title">Project Info</div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Use</div>
+                    <div class="info-value">Stay, Library</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Status</div>
+                    <div class="info-value">건축허가완료</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Year</div>
+                    <div class="info-value">2025</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Site area </div>
+                    <div class="info-value">2,432 ㎡</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Building Area</div>
+                    <div class="info-value">699.60 ㎡</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Location</div>
+                    <div class="info-value">경상남도 양산시</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-description">
+        <div class="description-grid">
+            <h2 class="project-title">ㅅㅇㄷ</h2>
+            <div class="description-text">
+                <div class="text-block">
+                    비 오던날 처음 대상지를 방문한 두 소장은 소석천의 물소리와 안개낀 산들을 둘러싸고 있는 땅을 보며 설렜던 마음을 잊을 수가 없다. 건축사 시험에 찌들어있던 둘째 소장은 분석조닝 공부를 뒤로하고 이 멋진 땅에 올라갈 사치스러운 용적률의 건물을 상상하며 프로젝트를 시작했다. 경사지를 계획을 통해 건축주의 땅을 최대한 활용하는 것이 계획안을 풀어내는 키가 될것 같았다.
+                </div>
+                <div class="text-block">
+                    <strong>생과 사 찰나의 공존</strong><br/>
+                    건축주는 그들의 부모님이 안치되실 장소를 상상하며 우리를 찾아오셨다. 이후엔 건축주 부부와, 자손들이 뒤이어 안치될 현대식 선산을 말씀 하시며 명절을 보내며 제사도 지내고, 후손들이 잠시 머무르고 갈 수 있는 장소가 되길 원했다.
+                    <br/><br/>
+                    60대의 건축주가 말하는 사후에 대한 이야기는  30대의 두 소장들에게 생경하게 다가왔다.  이 공간은 그저 죽음과 그를 기리는 마음과 더불어, 남겨진 후손들의 모습까지 그리는 그 깊이를 담아내야 한다고 생각했다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/3_main.png" alt="시온당 전경" class="gallery-image">
+                    <div class="gallery-caption">시온당 전경</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/4_entrance.png" alt="시온당 내부" class="gallery-image">
+                    <div class="gallery-caption">시온당 내부</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/5_round.png" alt="시온당 전체 뷰" class="gallery-image">
+                    <div class="gallery-caption">시온당 전체 뷰</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/2_diagram.jpg" alt="시온당 전경" class="gallery-image">
+                    <div class="gallery-caption">시온당 전경</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/6_archive.png" alt="시온당 전경" class="gallery-image">
+                    <div class="gallery-caption">시온당 전경</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/7_madang.png" alt="시온당 내부" class="gallery-image">
+                    <div class="gallery-caption">시온당 내부</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/8_mindroad.png" alt="시온당 전체 뷰" class="gallery-image">
+                    <div class="gallery-caption">시온당 전체 뷰</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image-wrapper">
+                    <img src="images/siondang/9round2.png" alt="시온당 전체 뷰" class="gallery-image">
+                    <div class="gallery-caption">시온당 전체 뷰</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <!-- 팝업 오버레이 추가 -->
+    <div class="popup-overlay">
+        <button class="popup-close"><i class="ph-x-thin"></i></button>
+        <div class="popup-content">
+            
+            <!-- 슬라이드 네비게이션 버튼 -->
+            <button class="slider-nav prev"><i class="ph-caret-left-thin"></i></button>
+            <img src="" alt="" class="popup-image">
+            <button class="slider-nav next"><i class="ph-caret-right-thin"></i></button>
+            <div class="popup-caption"></div>
+        </div>
+    </div>
+
+    <script src="include.js"></script>
+    <script>
+        // Lenis 스크롤 초기화
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 부드러운 이징
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            smoothTouch: false, // 모바일에서는 기본 스크롤 사용
+            touchMultiplier: 2
+        });
+
+        // Lenis 스크롤 업데이트를 위한 RAF
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // IntersectionObserver와 Lenis 연동
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '50px'
+        };
+
+        const handleIntersection = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        };
+
+        // 컴포넌트 로딩 상태 체크
+        window.addEventListener('load', function() {
+            const navContainer = document.getElementById('nav-container');
+            const footerContainer = document.getElementById('footer-container');
+            const heroBackground = document.querySelector('.hero-background');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // 패럴랙스 스크롤 효과를 Lenis 스크롤 이벤트와 연동
+            lenis.on('scroll', ({ scroll }) => {
+                if (heroBackground) {
+                    heroBackground.style.transform = `translateZ(-1px) scale(2) translateY(${scroll * 0.5}px)`;
+                }
+            });
+            
+            // 네비게이션과 푸터 로딩
+            if (!navContainer.children.length) {
+                loadComponent('nav.html', 'nav-container').then(() => {
+                    const navbar = document.querySelector('.navbar');
+                    if (navbar) {
+                        navbar.style.opacity = '1';
+                        navbar.classList.add('animate');
+                    }
+                    // 네비게이션 컨테이너의 투명도 설정
+                    navContainer.style.opacity = '1';
+                });
+            }
+            if (!footerContainer.children.length) {
+                loadComponent('footer.html', 'footer-container');
+            }
+
+            // IntersectionObserver 설정
+            const observer = new IntersectionObserver(handleIntersection, observerOptions);
+            galleryItems.forEach(item => observer.observe(item));
+        });
+
+        // 이미지 팝업 기능
+        window.addEventListener('load', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const popupOverlay = document.querySelector('.popup-overlay');
+            const popupImage = document.querySelector('.popup-image');
+            const popupCaption = document.querySelector('.popup-caption');
+            const popupClose = document.querySelector('.popup-close');
+            const btnPrev = document.querySelector('.slider-nav.prev');
+            const btnNext = document.querySelector('.slider-nav.next');
+            let currentIndex = 0;
+
+            // 갤러리 클릭 시 팝업 열기 및 인덱스 설정
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentIndex = index;
+                    updatePopup();
+                    popupOverlay.classList.add('active');
+                    lenis.stop();
+                });
+            });
+
+            // 팝업 내용 업데이트 함수
+            function updatePopup() {
+                const item = galleryItems[currentIndex];
+                const img = item.querySelector('.gallery-image');
+                const cap = item.querySelector('.gallery-caption');
+                popupImage.src = img.src;
+                popupImage.alt = img.alt;
+                popupCaption.textContent = cap.textContent;
+            }
+
+            // 네비게이션 버튼
+            btnPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                updatePopup();
+            });
+            btnNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                updatePopup();
+            });
+
+            // 키보드 좌우 화살표로 슬라이드 이동
+            document.addEventListener('keydown', (e) => {
+                if (popupOverlay.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                        updatePopup();
+                    } else if (e.key === 'ArrowRight') {
+                        currentIndex = (currentIndex + 1) % galleryItems.length;
+                        updatePopup();
+                    }
+                }
+            });
+
+            // 팝업 닫기
+            const closePopup = () => {
+                popupOverlay.classList.remove('active');
+                lenis.start();
+            };
+
+            popupClose.addEventListener('click', closePopup);
+            popupOverlay.addEventListener('click', (e) => {
+                if (e.target === popupOverlay) {
+                    closePopup();
+                }
+            });
+            
+            // ESC 키로 팝업 닫기
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+                    closePopup();
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html> 

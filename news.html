@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News | OOOA Architects</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #fff;
+            color: #1e1e1e;
+        }
+
+        .news-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 5vw;
+        }
+
+        .news-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .news-item {
+            border-top: 1px solid #eee;
+        }
+
+        .news-item:last-child {
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-header {
+            padding: 2rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .news-header:hover {
+            opacity: 0.7;
+        }
+
+        .news-date {
+            font-size: 0.875rem;
+            color: #666;
+            min-width: 100px;
+        }
+
+        .news-title-text {
+            font-size: 1.125rem;
+            font-weight: 500;
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .news-toggle {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .news-toggle::before,
+        .news-toggle::after {
+            content: '';
+            position: absolute;
+            background: #1e1e1e;
+            transition: all 0.3s ease;
+        }
+
+        .news-toggle::before {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .news-toggle::after {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .news-item.active .news-toggle::before {
+            transform: translateX(-50%) rotate(90deg);
+            opacity: 0;
+        }
+
+        .news-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 2rem;
+        }
+
+        .news-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            margin: 0;
+            padding-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .news-container {
+                padding: 6rem 5vw;
+            }
+
+            .news-title {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .news-header {
+                padding: 1.5rem 0;
+            }
+
+            .news-date {
+                min-width: 80px;
+                font-size: 0.75rem;
+            }
+
+            .news-title-text {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .news-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-container"></div>
+
+    <main class="news-container">
+        <h1 class="news-title">News</h1>
+        
+        <div class="news-list">
+            <div class="news-item">
+                <div class="news-header">
+                    <div class="news-date">2024.03.15</div>
+                    <div class="news-title-text">시온당 프로젝트 건축허가 완료</div>
+                    <div class="news-toggle"></div>
+                </div>
+                <div class="news-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                        Vivamus vestibulum velit vitae nisi facilisis, nec blandit mauris fermentum.  
+                        Curabitur ullamcorper, justo eu porta pretium, sem nulla tristique nunc, ac rhoncus justo nulla vitae augue.  
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  
+                        Suspendisse potenti. Integer a odio at elit laoreet pulvinar a ut magna.  
+                        </p>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-header">
+                    <div class="news-date">2024.02.28</div>
+                    <div class="news-title-text">2025년 신규 프로젝트 시작</div>
+                    <div class="news-toggle"></div>
+                </div>
+                <div class="news-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                        Vivamus vestibulum velit vitae nisi facilisis, nec blandit mauris fermentum.  
+                        Curabitur ullamcorper, justo eu porta pretium, sem nulla tristique nunc, ac rhoncus justo nulla vitae augue.  
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  
+                        Suspendisse potenti. Integer a odio at elit laoreet pulvinar a ut magna.  
+                        </p>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-header">
+                    <div class="news-date">2024.01.10</div>
+                    <div class="news-title-text">2024 한국건축문화대상 … “기존 틀 벗어난 창의적 시도 돋보여”</div>
+                    <div class="news-toggle"></div>
+                </div>
+                <div class="news-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                        Vivamus vestibulum velit vitae nisi facilisis, nec blandit mauris fermentum.  
+                        Curabitur ullamcorper, justo eu porta pretium, sem nulla tristique nunc, ac rhoncus justo nulla vitae augue.  
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  
+                        Suspendisse potenti. Integer a odio at elit laoreet pulvinar a ut magna.  
+                        </p>
+                </div>
+            </div>  
+            
+            <div class="news-item">
+                <div class="news-header">
+                    <div class="news-date">2024.02.28</div>
+                    <div class="news-title-text">2025년 신규 프로젝트 시작</div>
+                    <div class="news-toggle"></div>
+                </div>
+                <div class="news-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                        Vivamus vestibulum velit vitae nisi facilisis, nec blandit mauris fermentum.  
+                        Curabitur ullamcorper, justo eu porta pretium, sem nulla tristique nunc, ac rhoncus justo nulla vitae augue.  
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  
+                        Suspendisse potenti. Integer a odio at elit laoreet pulvinar a ut magna.  
+                        </p>
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-header">
+                    <div class="news-date">2024.01.10</div>
+                    <div class="news-title-text">2024 한국건축문화대상 … “기존 틀 벗어난 창의적 시도 돋보여”</div>
+                    <div class="news-toggle"></div>
+                </div>
+                <div class="news-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                        Vivamus vestibulum velit vitae nisi facilisis, nec blandit mauris fermentum.  
+                        Curabitur ullamcorper, justo eu porta pretium, sem nulla tristique nunc, ac rhoncus justo nulla vitae augue.  
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  
+                        Suspendisse potenti. Integer a odio at elit laoreet pulvinar a ut magna.  
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                        Vivamus vestibulum velit vitae nisi facilisis, nec blandit mauris fermentum.  
+                        Curabitur ullamcorper, justo eu porta pretium, sem nulla tristique nunc, ac rhoncus justo nulla vitae augue.  
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  
+                        Suspendisse potenti. Integer a odio at elit laoreet pulvinar a ut magna. 
+                        </p>
+                </div>
+            </div>  
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="include.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const newsItems = document.querySelectorAll('.news-item');
+            
+            newsItems.forEach(item => {
+                const header = item.querySelector('.news-header');
+                const content = item.querySelector('.news-content');
+                
+                header.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // 모든 아코디언 닫기
+                    newsItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.news-content').style.maxHeight = null;
+                    });
+                    
+                    // 클릭한 아코디언 토글
+                    if (!isActive) {
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note | OOOA Architects</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="note.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <style>
+      /* 페이지네이션 아이콘 스타일 */
+      .pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; }
+      .pagination .page-btn { background: none; border: none; color: #1e1e1e; font-size: 1.5rem; cursor: pointer; padding: 0.25rem; transition: opacity 0.3s ease; }
+      .pagination .page-btn:hover { opacity: 0.7; }
+      .pagination .page-btn i { vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <div id="nav-container"></div>
+
+    <main class="note-container">
+        <h1 class="page-title">Note</h1>
+        
+        <div class="note-grid">
+            <!-- 블로그 카드 1 -->
+            <article class="note-card">
+                <a href="#" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1618628785490-e5f87609f624?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="프로젝트 킥오프 현장 답사">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-date">May 1, 2024</span>
+                        <h2 class="card-title">프로젝트 킥오프 현장 답사</h2>
+                        <p class="card-excerpt">첫 미팅 이후 현장 답사를 통해 주변 환경과 도시 맥락을 세심히 관찰하며 디자인 방향을 설정했습니다.</p>
+                    </div>
+                </a>
+            </article>
+
+            <!-- 블로그 카드 2 -->
+            <article class="note-card">
+                <a href="#" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1519143009590-e3800b9df468?q=80&w=3211&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800" alt="사이트 분석 및 측량">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-date">May 8, 2024</span>
+                        <h2 class="card-title">사이트 분석 및 측량</h2>
+                        <p class="card-excerpt">지형, 채광, 바람 방향을 분석하고 상세 측량을 수행해 설계의 기초 자료로 활용했습니다.</p>
+                    </div>
+                </a>
+            </article>
+
+            <!-- 블로그 카드 3 -->
+            <article class="note-card">
+                <a href="#" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1550861959-108e43844b8e?q=80&w=3500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800" alt="컨셉 스케치 완성">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-date">May 15, 2024</span>
+                        <h2 class="card-title">컨셉 스케치 완성</h2>
+                        <p class="card-excerpt">프로젝트 컨셉을 시각화하는 첫 스케치를 통해 공간의 흐름과 핵심 요소를 정리했습니다.</p>
+                    </div>
+                </a>
+            </article>
+
+            <!-- 블로그 카드 4 -->
+            <article class="note-card">
+                <a href="#" class="card-link">
+                    <div class="card-image">
+                        <img src="https://plus.unsplash.com/premium_photo-1671707015820-676da68c2d95?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800" alt="재료 선정 과정">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-date">May 22, 2024</span>
+                        <h2 class="card-title">재료 선정 과정</h2>
+                        <p class="card-excerpt">설계 초기 단계에서 구조적 요구사항과 디자인 의도를 동시에 만족시키기 위해 목재, 콘크리트, 금속, 유리 등 다양한 후보 자재를 실험했습니다. 경제성, 시공성, 환경적 지속 가능성을 종합적으로 검토하여 최종 자재 스펙과 디테일을 확정했습니다.</p>
+                    </div>
+                </a>
+            </article>
+
+            <!-- 블로그 카드 5 -->
+            <article class="note-card">
+                <a href="#" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1721244653721-bc681b2dfd27?q=80&w=2681&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800" alt="도면 제작 및 검토">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-date">June 1, 2024</span>
+                        <h2 class="card-title">도면 제작 및 검토</h2>
+                        <p class="card-excerpt">CAD와 BIM 툴을 활용해 상세 도면을 작성하고 내부 검토 회의를 통해 디자인을 보강했습니다.</p>
+                    </div>
+                </a>
+            </article>
+
+            <!-- 블로그 카드 6 -->
+            <article class="note-card">
+                <a href="#" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1741851374467-c53876940807?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800" alt="최종 리뷰 및 마감">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-date">June 8, 2024</span>
+                        <h2 class="card-title">최종 리뷰 및 마감</h2>
+                        <p class="card-excerpt">모든 설계 요소를 최종 검토하고, 클라이언트에게 완성본을 제출하며 프로젝트를 마무리했습니다.</p>
+                    </div>
+                </a>
+            </article>
+        </div>
+
+        <!-- 간단한 페이지네이션 -->
+        <div class="pagination">
+            <button class="page-btn prev-btn"><i class="ph-caret-left-thin"></i></button>
+            <span class="current-page">1</span>
+            <button class="page-btn next-btn"><i class="ph-caret-right-thin"></i></button>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="include.js"></script>
+</body>
+</html> 
