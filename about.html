@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | OOOA Architects</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="about.css">
+    <style>
+        /* About 페이지 히어로 배경 이미지 */
+        .about-hero {
+            width: 100%;
+            position: relative;
+            left: 0;
+            transform: none;
+            height: 35vh;
+            background: url('images/bg_about.jpeg') center/cover no-repeat;
+        } 
+        /* 페이지 타이틀 숨김 */
+        .studio-title,
+        .studio-subtitle {
+            display: none;
+        }
+
+        /* 초기 페이드 인: 로고, 인트로 */
+        .logo-section,
+        .intro-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .logo-section.visible,
+        .intro-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* meaning-section 캐릭터 아이템 슬라이드 인 */
+        .meaning-section .character-item {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .meaning-section .character-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .meaning-section .character-item:nth-child(1) { transition-delay: 0.8s; }
+        .meaning-section .character-item:nth-child(2) { transition-delay: 1.2s; }
+        .meaning-section .character-item:nth-child(3) { transition-delay: 1.6s; }
+
+        .logo-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        .logo-section.visible,
+        .intro-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: #1e1e1e;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .company-name {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-container"></div>
+
+    <!-- 히어로 배너 섹션 (메인 바깥으로 이동) -->
+    <section class="about-hero"></section>
+    <main class="about-container">
+        <div class="logo-section">
+            <img src="images/logo.png" alt="OOOA Architects Logo">
+            <h2 class="company-name">오오오에이 건축사무소</h2>
+        </div>
+
+        <div class="sections-grid">
+            <section class="intro-section">
+                <!-- 제목 영역 숨김하여 이미지로 대체 -->
+                
+                <div class="intro-content">
+                    <div class="intro-text">
+                        <!-- <h2>오오오에이 건축사사무소</h2><br/> -->
+                        <h3>깨달을 오 悟, 나 오 吾 , 집 오 屋</h3><br/>
+                        <p>‘집’은 ‘나’를 담는 공간, 사람의 삶과 꿈을 담는 그릇입니다.</p>
+                        <p>그 안에서 스스로를 발견하고, 관계를 맺고, 이야기를 만들 수 있는</p>  
+                        <p>우리는 그런 공간을 만들고자 합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="meaning-section">
+                <div class="character-grid">
+                    <div class="character-item">
+                        <div class="character">悟.</div>
+                        <div class="character-content">
+                            <b>깨달음</b>
+                            <p>
+                                모든 건축은 사람과 공간을 새롭게 이해하는 데서 시작됩니다. <br/>
+                                우리는 땅이 가진 시간의 결을 읽고, 그곳에 살게 될 이들의 이야기에 귀 기울입니다. 
+                                그 깨달음으로부터 하나의 공간은 세상에 단 하나뿐인 의미를 얻습니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-item">
+                        <div class="character">吾.</div>
+                        <div class="character-content">
+                            <b>나</b>
+                            <p>
+                                우리가 설계하는 집은 사용자의 삶을 비추는 거울과 같습니다. <br/>
+                                그곳은 나만의 색깔, 나만의 온도를 품은 작은 세계로, 
+                                자신을 온전히 담을 수 있는 공간이 되기를 바랍니다.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-item">
+                        <div class="character">屋.</div>
+                        <div class="character-content">
+                            <b>집</b>
+                            <p>
+                                집은 단순히 머무는 곳이 아니라, 마음을 두는 자리입니다. <br/>
+                                아기자기하고 작지만 정감이 가득한 공간, 소박하지만 따뜻한 곳. 
+                                oooa는 당신이 집이라는 단어를 떠올릴 때 느끼는 그 편안함을 건축으로 표현하고자 합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="architect-section">
+            <h2>Arichitect.</h2>
+            <div class="divider"></div>
+            
+            <div class="architects-grid">
+                <div class="architect-card">
+                    <div class="card-front">
+                        <h3>엄선희 <span class="eng-name">Seonhee Um</span></h3>
+                        <p class="position">대표 / 건축사</p>
+                        <div class="profile-info">
+                            <p><b>대한민국 건축사 KIRA</b></p>
+                            <p>omm건축사사무소</p>
+                            <p>시아플랜 건축사사무소</p>
+                            <p>디에이그룹 엔지니어링 종합건축사사무소</p>
+                            <p>인하대학교 건축학과 학사</p>
+                        </div>
+                        <div class="contact-info">
+                            <p>seonhee.um@oooa-a.com</p>
+                            <p>010 3695 5364</p>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <p class="quote">"집은 나를 닮은 공간이어야 한다"</p>
+                            <p class="quote-sub">"디테일에 깃든 감정이 공간을 완성한다"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="architect-card">
+                    <div class="card-front">
+                        <h3>양혜린 <span class="eng-name">Healin Yang</span></h3>
+                        <p class="position">대표 / 건축사</p>
+                        <div class="profile-info">
+                            <p><b>대한민국 건축사 KIRA</b></p>
+                            <p>시아플랜 건축사사무소</p>
+                            <p>인하대학교 건축학과 학사</p>
+                        </div>
+                        <div class="contact-info">
+                            <p>healin.yang@oooa-a.com</p>
+                            <p>010 4537 7988</p>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="overlay-content">
+                            <p class="quote">"공간은 관계를 담는 그릇이다"</p>
+                            <p class="quote-sub">"여백 속에 머무는 편안함을 설계하다"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="include.js"></script>
+    <script src="about.js"></script>
+    <!-- 페이드 및 스크롤 애니메이션 스크립트 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.querySelector('.logo-section');
+            const intro = document.querySelector('.intro-section');
+            setTimeout(() => logo?.classList.add('visible'), 200);
+            setTimeout(() => intro?.classList.add('visible'), 400);
+
+            // meaning-section 캐릭터 아이템 순차 등장 (페이지 로드)
+            const items = document.querySelectorAll('.meaning-section .character-item');
+            setTimeout(() => {
+                items.forEach(item => item.classList.add('visible'));
+            }, 600);
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | OOOA Architects</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contact.css">
+    <style>
+        /* 팝업 스타일 추가 */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 4px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: translateY(0);
+        }
+
+        .popup-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .popup-message {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .popup-button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .popup-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-container"></div>
+
+    <!-- 팝업 추가 -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-content">
+            <h3 class="popup-title" id="popup-title">문의 접수 완료</h3>
+            <p class="popup-message" id="popup-message">문의가 정상적으로 접수되었습니다.</p>
+            <button class="popup-button" id="popup-close">닫기</button>
+        </div>
+    </div>
+
+    <main class="contact-container">
+        <!-- 상단 영역: 회사 정보와 지도 -->
+        <div class="top-grid">
+            <!-- 왼쪽: 오피스 정보 -->
+            <section class="office-info">
+                <h2>Our Office</h2>
+                <div class="office-details">
+                    <p class="company-name">오오오에이 건축사사무소</p>
+                    <p class="address">서울 성동구 성수이로22길 51-1, 4F</p>
+                    <p class="phone">010-3695-5364</p>
+                    <p class="phone">010-4537-7988</p>
+                </div>
+            </section>
+            
+            <!-- 오른쪽: 지도 -->
+            <section class="map-section">
+                <div class="map-container">
+                    <iframe
+                        src="https://maps.google.com/maps?q=서울%20성동구%20성수이로22길%2051-1&amp;z=16&amp;output=embed"
+                        width="100%"
+                        height="500"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </section>
+        </div>
+        
+        <!-- 하단 영역: CONTACT US -->
+        <div class="bottom-grid">
+            <!-- 왼쪽: 설명 텍스트 -->
+            <section class="contact-info">
+                <h2>Contact</h2>
+                <p class="contact-desc">프로젝트에 대한 검토 및 상담 문의를 남겨주세요.</p>
+            </section>
+            
+            <!-- 오른쪽: 연락처 폼 -->
+            <section class="form-section">
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">이름 *</label>
+                        <input type="text" id="name" name="name" required minlength="1" maxlength="50" placeholder="이름을 입력해주세요">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">연락처 *</label>
+                        <input type="tel" id="phone" name="phone" required pattern="[0-9\-\+\s\(\)]{8,20}" maxlength="20" placeholder="연락처를 입력해주세요">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">상담내용 *</label>
+                        <textarea id="message" name="message" required minlength="5" maxlength="1000" placeholder="상담내용을 입력해주세요"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span class="loading" id="loading-spinner"></span>
+                        SUBMIT
+                    </button>
+                    
+                    <div class="form-status" id="form-status"></div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="include.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Include loadComponent 직접 정의
+            function loadComponent(componentUrl, targetId) {
+                fetch(componentUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP 오류! 상태: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById(targetId).innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('컴포넌트 로드 중 오류 발생:', error);
+                });
+            }
+            
+            // Load components
+            const navContainer = document.getElementById('nav-container');
+            if (navContainer) {
+                loadComponent('nav.html', 'nav-container');
+            }
+            
+            const footerContainer = document.getElementById('footer-container');
+            if (footerContainer) {
+                loadComponent('footer.html', 'footer-container');
+            }
+            
+            const form = document.getElementById('contact-form');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const messageInput = document.getElementById('message');
+            const formStatus = document.getElementById('form-status');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            
+            // Form validation function
+            function validateForm() {
+                let isValid = true;
+                let firstInvalidField = null;
+                
+                // Validate name
+                if (!nameInput.value.trim() || nameInput.value.length < 2) {
+                    isValid = false;
+                    firstInvalidField = firstInvalidField || nameInput;
+                }
+                
+                // Validate phone
+                const phoneRegex = /^[0-9\-\+\s\(\)]{8,20}$/;
+                if (!phoneInput.value.trim() || !phoneRegex.test(phoneInput.value.trim())) {
+                    isValid = false;
+                    firstInvalidField = firstInvalidField || phoneInput;
+                }
+                
+                // Validate message
+                if (!messageInput.value.trim() || messageInput.value.length < 10) {
+                    isValid = false;
+                    firstInvalidField = firstInvalidField || messageInput;
+                }
+                
+                // Focus on the first invalid field
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission handler
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate form
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Show loading spinner
+                loadingSpinner.style.display = 'inline-block';
+                
+                // Disable submit button
+                const submitBtn = form.querySelector('.submit-btn');
+                submitBtn.disabled = true;
+                
+                // Debug log
+                console.log('Sending form to Formspree...');
+                
+                // Prepare template parameters
+                const templateParams = {
+                    name: nameInput.value.trim(),
+                    phone: phoneInput.value.trim(),
+                    message: messageInput.value.trim()
+                };
+                
+                // Send form data using Formspree
+                fetch('https://formspree.io/f/xovdzobl', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    console.log('Formspree response:', response);
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('폼 제출 중 오류가 발생했습니다.');
+                })
+                .then(data => {
+                    console.log('Formspree success:', data);
+                    
+                    // Reset form
+                    form.reset();
+                    
+                    // Show popup
+                    document.getElementById('popup-title').textContent = '문의 접수 완료';
+                    document.getElementById('popup-message').textContent = '문의가 정상적으로 접수되었습니다.';
+                    document.getElementById('popup-overlay').classList.add('active');
+                })
+                .catch(error => {
+                    console.error('Formspree error:', error);
+                    
+                    // Show popup with error
+                    document.getElementById('popup-title').textContent = '오류 발생';
+                    document.getElementById('popup-message').textContent = error.message || '문의 접수 중 오류가 발생했습니다. 다시 시도해 주세요.';
+                    document.getElementById('popup-overlay').classList.add('active');
+                })
+                .finally(() => {
+                    // Hide loading spinner and re-enable submit button
+                    loadingSpinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+            });
+            
+            // Popup close button
+            document.getElementById('popup-close').addEventListener('click', function() {
+                document.getElementById('popup-overlay').classList.remove('active');
+            });
+            
+            // Input event listeners for real-time validation - simplified
+            nameInput.addEventListener('input', function() {
+                // Input validation without error message display
+            });
+            
+            phoneInput.addEventListener('input', function() {
+                // Input validation without error message display
+            });
+            
+            messageInput.addEventListener('input', function() {
+                // Input validation without error message display
+            });
+            
+            // Keyboard accessibility - trap focus in popup when active
+            document.getElementById('popup-close').addEventListener('keydown', function(e) {
+                if (e.key === 'Tab' && !e.shiftKey) {
+                    e.preventDefault();
+                    document.getElementById('popup-overlay').querySelector('h3').focus();
+                }
+            });
+            
+            // Make sure the popup is accessible via keyboard
+            document.getElementById('popup-overlay').addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

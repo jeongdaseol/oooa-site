@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note | OOOA Architects</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="note.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <style>
+      /* 노션 임베드 컨테이너 스타일 */
+      .notion-embed-container {
+          width: 100%;
+          height: calc(100vh - 120px); /* 헤더/푸터 높이를 뺀 전체 화면 높이 */
+          overflow: hidden;
+          position: relative;
+          margin: 0;
+          max-width: 100%; /* 전체 너비 사용 */
+          padding: 0;
+      }
+      
+      .notion-embed-container iframe {
+          width: 100%;
+          height: calc(100vh - 50px); /* 헤더 높이만큼 더 크게 설정 */
+          position: absolute;
+          top: -40px;  /* 노션 상단 바 숨김 */
+          left: 0;
+          border: none;
+      }
+
+      main {
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+          margin: 0;
+          padding-top: 80px;
+      }
+
+      body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+      }
+    </style>
+</head>
+<body>
+    <div id="nav-container"></div>
+
+    <main>
+        <!-- Notion Embed -->
+        <div class="notion-embed-container">
+            <iframe src="https://interesting-chatter-474.notion.site/ebd/1fb845c319a5803fb8a0dccc63fc596b?v=1fb845c319a5814e9cf9000ceba0e68a&hideTopBar=true" allowfullscreen></iframe>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="include.js"></script>
+</body>
+</html> 

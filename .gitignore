@@ -1,0 +1,15 @@
+# 이미지 파일 제외
+images/
+*.jpg
+*.jpeg
+*.png
+*.gif
+
+# 시스템 파일
+.DS_Store
+.vscode/
+
+# 기타 큰 파일
+*.zip
+*.tar.gz
+node_modules

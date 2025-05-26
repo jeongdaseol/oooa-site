@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | OOOA Architects</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="projects.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    <div id="nav-container"></div>
+
+    <main class="projects-container">
+        <div class="project-slider">
+            <div class="slider-container">
+                <div class="slide" data-link="siondang.html" data-index="0">
+                    <img src="images/hero_slide_01.png" alt="시온당">
+                </div>
+                <div class="slide" data-index="1">
+                    <img src="images/hero_slide_02.png" alt="dental clinic">
+                </div>
+                <div class="slide" data-index="2">
+                    <img src="images/hero_slide_03.jpeg" alt="Coolest Walnut house">
+                </div>
+            </div>
+            <div class="project-info">
+                <h2 class="project-title">Siondang</h2>
+                <div class="slider-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="slide-count">01 / 03</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 프로젝트 리스트 섹션 -->
+        <div class="projects-list">
+            <div class="project-grid">
+                <!-- 1행 -->
+                <div class="project-card">
+                    <a href="siondang.html">
+                        <div class="project-card-image">
+                            <img src="images/siondang/main.png" alt="Siondang">
+                            <div class="project-card-overlay">
+                                <p class="project-card-category">Stay / 2025</p>
+                                <h3 class="project-card-title">Siondang</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="#">
+                        <div class="project-card-image">
+                            <img src="images/hero_slide_02.png" alt="Dental Clinic">
+                            <div class="project-card-overlay">
+                                <p class="project-card-category">Commercial / 2023</p>
+                                <h3 class="project-card-title">Dental Clinic</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="#">
+                        <div class="project-card-image">
+                            <img src="images/hero_slide_03.jpeg" alt="Sindangdong">
+                            <div class="project-card-overlay">
+                                <p class="project-card-category">Commercial / 2022</p>
+                                <h3 class="project-card-title">Sindangdong</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- 2행 -->
+                <div class="project-card">
+                    <a href="#">
+                        <div class="project-card-image">
+                            <img src="images/hero_slide_01.png" alt="Magok MICE">
+                            <div class="project-card-overlay">
+                                <p class="project-card-category">Office Lounge / 2023</p>
+                                <h3 class="project-card-title">Magok MICE</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="#">
+                        <div class="project-card-image">
+                            <img src="images/hero_slide_02.png" alt="Osan 119 Safety Center">
+                            <div class="project-card-overlay">
+                                <p class="project-card-category">Competition / 2021</p>
+                                <h3 class="project-card-title">Osan 119 Safety Center</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <a href="#">
+                        <div class="project-card-image">
+                            <img src="images/hero_slide_03.jpeg" alt="Coolest Walnut">
+                            <div class="project-card-overlay">
+                                <p class="project-card-category">Retreat / 2024</p>
+                                <h3 class="project-card-title">Coolest Walnut</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="include.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="projects.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // 프로젝트 카드 애니메이션 효과
+        document.addEventListener('DOMContentLoaded', function() {
+            // 네비게이션 컴포넌트 로드 확인
+            const navContainer = document.getElementById('nav-container');
+            if (!navContainer.children.length) {
+                loadComponent('nav.html', 'nav-container');
+            }
+            
+            // 푸터 컴포넌트 로드 확인
+            const footerContainer = document.getElementById('footer-container');
+            if (!footerContainer.children.length) {
+                loadComponent('footer.html', 'footer-container');
+            }
+
+            // Intersection Observer로 프로젝트 카드 등장 애니메이션
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            projectCards.forEach((card, index) => {
+                // 지연 애니메이션 효과를 위해 inline 스타일 추가
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `opacity 0.6s ease, transform 0.6s ease`;
+                card.style.transitionDelay = `${index * 0.1}s`;
+                
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html> 

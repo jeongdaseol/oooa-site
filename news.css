@@ -1,0 +1,121 @@
+/* News 페이지 스타일 */
+.news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 0;
+    margin-top: 4rem;
+}
+    
+.page-title {
+    font-size: 3.625rem;
+    font-weight: 400;
+    margin-bottom: 6rem;
+    letter-spacing: 0em;
+}
+
+.news-grid {
+    display: grid;
+    gap: 50px;
+}
+
+.news-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 50px;
+    transition: all 0.3s ease;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-meta {
+    margin-bottom: 15px;
+}
+
+.news-date {
+    color: #666;
+    font-size: 14px;
+    display: block;
+}
+
+.news-item h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.news-item p {
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.read-more {
+    color: #1e1e1e;
+    text-decoration: none;
+    font-size: 14px;
+    position: relative;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.read-more::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #1e1e1e;
+    transition: width 0.3s ease;
+}
+
+.read-more:hover::after {
+    width: 100%;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .news-container {
+        padding: 100px 20px 60px;
+    }
+
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 40px;
+    }
+
+    .news-grid {
+        gap: 40px;
+    }
+    
+    .news-item {
+        padding-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-container {
+        padding: 80px 15px 50px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+    
+    .news-item h2 {
+        font-size: 20px;
+    }
+    
+    .news-grid {
+        gap: 30px;
+    }
+    
+    .news-item {
+        padding-bottom: 30px;
+    }
+} 
